@@ -1,3 +1,4 @@
+vim.g.mapleader = " "
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -37,5 +38,10 @@ require("nvim-tree").setup({
 
 -- lualine
 require('lualine').setup()
-
 vim.keymap.set('n', '<C-n>', '<cmd>NvimTreeToggle<CR>')
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
