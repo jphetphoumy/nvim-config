@@ -12,6 +12,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins", opts)
+
+require("jphetphoumy.set")
+require("jphetphoumy.remap")
 -- colorscheme
 vim.cmd.colorscheme "catppuccin-frappe"
 
@@ -20,8 +23,6 @@ vim.cmd.colorscheme "catppuccin-frappe"
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- set termguicolors to enable highlight groups
-vim.opt.termguicolors = true
 
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
@@ -38,10 +39,3 @@ require("nvim-tree").setup({
 
 -- lualine
 require('lualine').setup()
-vim.keymap.set('n', '<C-n>', '<cmd>NvimTreeToggle<CR>')
-
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
