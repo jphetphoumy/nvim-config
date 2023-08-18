@@ -1,41 +1,26 @@
-vim.g.mapleader = " "
+require('settings')
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable",
+        lazypath
+    })
 end
 vim.opt.rtp:prepend(lazypath)
-require("lazy").setup("plugins", opts)
 
-require("jphetphoumy.set")
-require("jphetphoumy.remap")
+vim.g.mapleader = " "
+require("lazy").setup("plugins")
+
 -- colorscheme
-vim.cmd.colorscheme "catppuccin-frappe"
+vim.cmd.colorscheme "catppuccin"
 
--- nvim-tree
--- disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
-
-require("nvim-tree").setup({
-  sort_by = "case_sensitive",
-  view = {
-    width = 30,
-  },
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = true,
-  },
+-- initialize lualine
+require('lualine').setup({
+    options = {
+        themem = "catppuccin"
+    }
 })
-
--- lualine
-require('lualine').setup()
